@@ -12,7 +12,7 @@
 
                     <% if(!newUser) { %>
 
-                        <%- include('formStudent', {users}) %>
+                        <%- include('formStudent', {users, student: edit ? student : undefined}) %>
 
                             <% } else { %>
                                 <div class="m-3">

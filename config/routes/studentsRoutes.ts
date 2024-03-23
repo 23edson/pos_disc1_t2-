@@ -7,7 +7,7 @@ const routes = express.Router()
 //rota base : /students/any
 routes.post('/new', students.create)
 routes.delete('/:id', authorize, students.delete)
-routes.put('/:id', authorize, students.update)
+routes.post('/:id', authorize, students.update, students.list)
 routes.get('/:id', authorize, students.show)
 
 export default routes

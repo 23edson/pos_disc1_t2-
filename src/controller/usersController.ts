@@ -5,7 +5,7 @@ import User from "../model/user"
 
 const users = {
 
-    //lista de todos os usuarios
+    //lista de todos os usuarios, formato para select
     async list() {
         return await User.findAll().then((response) => {
             return response.map((item) => {
@@ -47,7 +47,7 @@ const users = {
 
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
         }
     },
 
@@ -99,9 +99,7 @@ const users = {
 
         }
         catch (error: any) {
-
-            return res.render('error')
-
+            return res.render('layout/error')
         }
     }
 }

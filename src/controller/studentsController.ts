@@ -1,4 +1,4 @@
-import { Request, Response, } from "express"
+import { Request, Response, NextFunction } from "express"
 import Student from "@/src/model/student"
 import dayjs from "dayjs"
 import User from "../model/user"
@@ -42,7 +42,7 @@ const students = {
 
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
         }
 
     },
@@ -62,12 +62,13 @@ const students = {
             const allUsers = await users.list()
 
             const student = await Student.findOne({ where: { id } }).then((student) => {
-                return {
-                    ...student
-                }
+                if (student)
+                    return {
+                        ...student.toJSON(),
+                        birthday: dayjs(student?.birthday).format('YYYY-MM-DD'),
+                    }
+                return null
             })
-
-            console.log(student)
 
             res.render('editStudent', {
                 student,
@@ -76,7 +77,7 @@ const students = {
             })
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
         }
     },
 
@@ -108,18 +109,34 @@ const students = {
 
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
         }
     },
 
-    async update(req: Request, res: Response) {
+    /**
+     * Método para atualizar um student
+     * @param req 
+     * @param res 
+     * @param next
+     * @route POST /students/:id 
+     * @returns 
+     */
+    async update(req: Request, res: Response, next: NextFunction) {
         try {
+            const { id } = req.params
+            const { student, birthday, user } = req.body
 
-            return res.redirect('/dashboard')
+            await Student.update({
+                name: student,
+                birthday,
+                user_id: user
+            }, { where: { id } })
 
+            //chama middleware que redireciona para dashboard
+            next()
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
 
         }
     },
@@ -148,7 +165,7 @@ const students = {
 
         } catch (error) {
             console.log(error)
-            return res.render('error')
+            return res.render('layout/error')
         }
     },
 
