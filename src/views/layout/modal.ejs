@@ -1,0 +1,47 @@
+<!-- Modal Bootstrap -->
+<div class="modal fade" id="modal-cadastro" tabindex="-1" aria-labelledby="modal-cadastro" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modal-cadastro">Cadastro de <%= newUser ? 'Usuário' : 'Aluno' %>
+                </h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="<%= newUser ? '/register'  : '/students/new'%>">
+                <div class="modal-body">
+
+                    <% if(!newUser) { %>
+
+                        <%- include('formStudent', {users}) %>
+
+                            <% } else { %>
+                                <div class="m-3">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-auto">
+                                            <label for="login" class="col-form-label">*Login</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input required type="text" id="login" name="login" class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="m-3">
+                                    <div class="row g-3 align-items-center">
+                                        <div class="col-auto">
+                                            <label for="password" class="col-form-label">*Password</label>
+                                        </div>
+                                        <div class="col-auto">
+                                            <input required type="password" id="password" name="password"
+                                                class="form-control">
+                                        </div>
+                                    </div>
+                                </div>
+                                <% } %>
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-primary">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

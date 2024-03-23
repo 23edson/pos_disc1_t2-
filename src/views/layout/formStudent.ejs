@@ -1,0 +1,42 @@
+<div class="m-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="student" class="col-form-label">*Nome aluno</label>
+        </div>
+        <div class="col-auto">
+            <input value="<%= typeof student !== undefined ? student.name : '' %>" required type="text" id="student"
+                name="student" class="form-control">
+        </div>
+
+    </div>
+</div>
+<div class="m-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="birthday" class="col-form-label">*Data aniversário</label>
+        </div>
+        <div class="col-auto">
+            <input value="<%= typeof student !== undefined ? student.birthday : '' %>" required type="date"
+                id="birthday" name="birthday" class="form-control">
+        </div>
+    </div>
+</div>
+
+<div class="m-3">
+    <div class="row g-3 align-items-center">
+        <div class="col-auto">
+            <label for="user" class="col-form-label">*Vincular usuário</label>
+        </div>
+        <select id="user" name="user" class="form-select" aria-label="Default select example">
+            <option selected="<%= typeof student == undefined %>">Escolha um usuário</option>
+            <% users.forEach((user, index)=> { %>
+
+                <option selected="<%= typeof student !== undefined && student.id == user ?true :false %>"
+                    value="<%= user.value %>">
+                    <%= user.label %>
+                </option>
+
+                <% }) %>
+        </select>
+
+    </div>
