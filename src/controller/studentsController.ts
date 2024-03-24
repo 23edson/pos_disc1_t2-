@@ -38,7 +38,13 @@ const students = {
             const allUsers = await users.list()
 
             //passa os dados para a view students
-            return res.render('students', { students, users: allUsers, loggedUser: req.session.user?.login })
+            return res.render('students',
+                {
+                    students,
+                    users: allUsers,
+                    loggedUser: req.session.user?.login,
+                    csrfToken: req.csrfToken()
+                })
 
         } catch (error) {
             console.log(error)
@@ -70,10 +76,14 @@ const students = {
                 return null
             })
 
+            //se não achou, apenas retorna ao dashboard
+            if (!student) return res.redirect('/dashboard')
+
             res.render('editStudent', {
                 student,
                 users: allUsers,
-                loggedUser: req.session.user?.login
+                loggedUser: req.session.user?.login,
+                csrfToken: req.csrfToken()
             })
         } catch (error) {
             console.log(error)

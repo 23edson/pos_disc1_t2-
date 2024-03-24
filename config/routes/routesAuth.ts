@@ -1,7 +1,6 @@
 import { NextFunction } from "express";
 import { Request, Response } from "express";
 
-
 /**
  * Verifica se o usuario está logado. Se estiver retorna ao próximo middleware,
  * senão manda para o login

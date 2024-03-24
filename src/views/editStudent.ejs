@@ -15,6 +15,8 @@
                             </b>
                         </h2>
                         <form action="/students/<%= student.id %>" method="post">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
                             <%- include('layout/formStudent', {student, users, edit: true}) %>
 
                                 <div class="form-group  d-flex justify-content-end">

@@ -42,7 +42,7 @@ const users = {
             }
 
             //redirecionado para o login
-            res.render('login', { created: true })
+            res.render('login', { csrfToken: req.csrfToken(), created: true })
 
 
         } catch (error) {
@@ -80,7 +80,7 @@ const users = {
 
         } catch (error: any) {
             console.log(error)
-            return res.render('login', { error: true })
+            return res.render('login', { csrfToken: req.csrfToken(), error: true })
         }
     },
 

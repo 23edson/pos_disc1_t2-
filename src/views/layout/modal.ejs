@@ -8,6 +8,8 @@
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <form method="post" action="<%= newUser ? '/register'  : '/students/new'%>">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+
                 <div class="modal-body">
 
                     <% if(!newUser) { %>

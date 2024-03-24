@@ -7,6 +7,7 @@ import initSequelize from "./src/model";
 import bodyParser from 'body-parser'
 import initSession from '@/config/session'
 
+
 const app = express()
 
 //init sequelize 

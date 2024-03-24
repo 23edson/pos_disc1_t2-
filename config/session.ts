@@ -3,6 +3,7 @@
 import session from 'express-session'
 import SQLiteStore from 'connect-sqlite3'
 
+
 const sqliteStore = SQLiteStore(session)
 
 //configuracao de sessao com o sqlite
@@ -11,12 +12,7 @@ const initSession = () => {
     const store = new sqliteStore({
         table: 'sessions',
         db: 'sessions.sqlite',
-        //dir: path.join(__dirname, '../dbs/'),
-        //dir: path.join(__dirname, '../dbs/'),
-
-
     })
-
 
     return session({
         //@ts-ignore
